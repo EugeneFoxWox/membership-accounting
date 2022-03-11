@@ -9,20 +9,12 @@ class Clients(Screen):
         self.manager.current = 'welcome'
 
      def id_client_list(self):
-        id = '1i1XjLemtPa9Pj3nIYFXMVyINXoPZkq0qblnaMoVLZeY'
+        id = '' # Тут ID таблицы
         gs = gspread.service_account(filename='fileapi.json')
         sh = gs.open_by_key(id)
         worksheet = sh.sheet1
-        Id = worksheet.col_values(1)
-        Fam = worksheet.col_values(3)
-        Name= worksheet.col_values(4)
-        Client_list = {}
-        for chel in Id:
-            if chel == 'Идентификатор клиента':
-                continue
-            chel = int(chel)
-            Client_list[chel] = Fam[chel]+ ' ' + Name[chel]
-        return Client_list
+        client_list = worksheet.get_all_records()
+        return client_list
       
       
     def id_abonement_list(self):
